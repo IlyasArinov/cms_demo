@@ -18,8 +18,11 @@ function CMSComponent() {
     const handleDrag = (e) => {
         console.log(e.target);
     }
+    const getRandomInt = (max) => {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
     return (
-        <Draggable bounds="body" onDrag={handleDrag} defaultPosition={{x: 20, y: 20}}>
+        <Draggable bounds="body" onDrag={handleDrag} defaultPosition={{x: getRandomInt(300), y: getRandomInt(300)}}>
             <div style={divStyle} className={'CMSComponent'}>Представим что это компонент</div>
         </Draggable>
     )
