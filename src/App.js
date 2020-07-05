@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import pageService from './services/pages';
 import Button from "./Components/Button";
 import CMSComponent from "./Components/CMSComponent";
 
 function App() {
     const [CMSComponents, setCMSComponents] = useState([]);
-
+    const id = 1; //Пока только одна страница
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/CMSComponents')
-            .then(response => {
-                setCMSComponents(response.data)
+        pageService
+            .get(id)
+            .then(returnedPage => {
+                console.log(returnedPage)
+                setCMSComponents(returnedPage.components)
             })
     }, []);
 
@@ -29,11 +31,15 @@ function App() {
     }
 
     const saveCMSComponents = () => {
-        let parsedCMSComponents = document.querySelectorAll('.CMSComponent');
-        let parsedData = [];
-        parsedCMSComponents.forEach(c => {
-            const id = c.dataset.is_new ? null : Number(c.dataset.id);
+        const parsedCMSComponents = document.querySelectorAll('.CMSComponent');
+        const changedPage = {
+            id: id,
+            components: []
+        };
+        //Было бы неплохо, если у компонентов всегда был один и тот же неменяющийся идентификатор
+        parsedCMSComponents.forEach((c, i) => {
             const data = {
+                id: i + 1,
                 position: {
                     x: c.dataset.x,
                     y: c.dataset.y,
@@ -44,24 +50,15 @@ function App() {
                 },
                 content: c.querySelector('.CMSComponentContent').innerHTML
             };
-            //убрать эту логику на сервер
-            if (id) {
-                axios
-                    .put(`http://localhost:3001/CMSComponents/${id}`, data)
-                    .then(response => {
-                        console.log('successfully updated', response);
-                    });
-            } else {
-                axios
-                    .post('http://localhost:3001/CMSComponents', data)
-                    .then(response => {
-                        console.log('successfully create', response);
-                    });
-            }
-            parsedData.push(data)
+            changedPage.components.push(data)
         });
-
-        // console.log({parsedData});
+        pageService.update(id, changedPage)
+            .then(returnedPage => {
+                setCMSComponents(returnedPage.components);
+            })
+            .catch(() => {
+                console.log('somethingHappened');
+            });
     };
 
   return (

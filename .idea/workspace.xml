@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e851f6-bd8f-463b-bf63-5e9ada82a16f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CMSComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CMSComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="68e851f6-bd8f-463b-bf63-5e9ada82a16f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +46,7 @@
       <workItem from="1593627211613" duration="33000" />
       <workItem from="1593846117147" duration="314000" />
       <workItem from="1593883000005" duration="5386000" />
+      <workItem from="1593941304870" duration="317000" />
     </task>
     <servers />
   </component>
