@@ -1,12 +1,24 @@
-import React from 'react';
-import Draggable from "react-draggable";
+import React, {useState} from 'react';
+import {Rnd} from 'react-rnd'
 
-function CMSComponent() {
+function CMSComponent({position, size, content, id, isNew}) {
+    const [newSize, setSize] = useState(size);
+    const [newPosition, setPosition] = useState(position);
+
+    const handleDragStop = (e, d) => {
+        setPosition({ x: d.x, y: d.y })
+    }
+    const handleResizeStop = (event, direction, ref, delta, currentPosition) => {
+        setSize({
+            width: ref.style.width,
+            height: ref.style.height
+        });
+        setPosition(currentPosition);
+    };
+
     const divStyle = {
         background: 'aliceblue',
-        height: 100,
         position: 'absolute',
-        width: 200,
         border: '1px solid blue',
         display: 'flex',
         justifyContent: 'center',
@@ -15,16 +27,10 @@ function CMSComponent() {
         top: 0,
         left: 0
     };
-    const handleDrag = (e) => {
-        console.log(e.target);
-    }
-    const getRandomInt = (max) => {
-        return Math.floor(Math.random() * Math.floor(max));
-    }
     return (
-        <Draggable bounds="body" onDrag={handleDrag} defaultPosition={{x: getRandomInt(300), y: getRandomInt(300)}}>
-            <div style={divStyle} className={'CMSComponent'}>Представим что это компонент</div>
-        </Draggable>
+        <Rnd data-is_new={isNew} data-id={id} className="CMSComponent" bounds="body" data-x={newPosition.x} data-y={newPosition.y} style={divStyle} position={newPosition} size={newSize} onDragStop={handleDragStop} onResizeStop={handleResizeStop}>
+            <span className="CMSComponentContent">{content}</span>
+        </Rnd>
     )
 }
 
