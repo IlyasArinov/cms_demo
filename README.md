@@ -1,10 +1,15 @@
 Для работы нужно скачать этот репозиторий и cms_demo_server.
+
 Здесь лежит реакт-приложение, в cms_demo_server: node.js + express.
+
 ##Установка
-Запустить в корне cms_demo
+
+####Запустить в корне cms_demo
 1. npm install
 2. npm start
-Запустить в корне cms_demo_server
+
+####Запустить в корне cms_demo_server
+
 1. npm install
 2. npm run dev 
 
