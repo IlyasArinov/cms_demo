@@ -2,6 +2,8 @@
 
 Здесь лежит реакт-приложение, в cms_demo_server: node.js + express.
 
+**Демо**: https://nameless-escarpment-85089.herokuapp.com/
+
 ## Установка
 
 #### Запустить в корне cms_demo
