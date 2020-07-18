@@ -8,7 +8,6 @@ import BlockWrapper from "./Components/BlockWrapper";
 function App() {
     const [blocks, setBlocks] = useState([]);
     const id = 1; //Пока только одна страница
-    let gridLayout;
     useEffect(() => {
         pageService
             .get(id)
@@ -23,30 +22,16 @@ function App() {
             grid: {x: 4, y: 1, w: 1, h: 2},
             content: null,
             blockType: 'Text',
-            id: `${blocks.length + 1}`
+            id: blocks.length + 1
         }
-        console.log(blocks);
-        console.log(newBlock);
         setBlocks([...blocks, newBlock ]);
     }
 
     const saveBlocks = () => {
         const changedPage = {
             id: id,
-            components: []
+            components: blocks
         };
-        //Было бы неплохо, если у компонентов всегда был один и тот же неменяющийся идентификатор
-        gridLayout.forEach((gridItem) => {
-            // let block = document.querySelector(`.block[data-id="${gridItem.i}"]`)
-            const data = {
-                id: gridItem.i,
-                grid: {...gridItem},
-                blockType: 'Text',
-                content: blocks.find(block => block.id === gridItem.i).content
-            };
-            console.log(data);
-            changedPage.components.push(data)
-        });
         pageService.update(id, changedPage)
             .then(returnedPage => {
                 // setCMSComponents(returnedPage.components);
@@ -56,7 +41,10 @@ function App() {
             });
     };
     const handleLayoutChange = (layout) => {
-        gridLayout = layout;
+        layout.forEach((gridItem) => {
+            let changedBlock = blocks.find(block => block.id === Number(gridItem.i));
+            changedBlock.grid = gridItem;
+        })
     }
     const updateContent = (id, content) => {
         const changedBlock = blocks.find(block => block.id === id);
