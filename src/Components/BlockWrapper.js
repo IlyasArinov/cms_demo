@@ -1,9 +1,15 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useMemo, useState} from 'react';
 
-function BlockWrapper({id, content, blockType, updateContent}) {
-    const Block = React.lazy(() => import(`../CMS/Blocks/${blockType}`));
+function BlockWrapper({id, content, blockType, blocks, updateBlocks}) {
+    const Block = useMemo(() => React.lazy(() => import(`../CMS/Blocks/${blockType}`)), [id]);
     const [overlayStyle, setOverlayStyle] = useState({});
-    const handleDoubleClick = (event) => {
+
+    const updateContent = (id, content) => {
+        const updatedBlocks = blocks.map(block => block.id === id ? {...block, content} : block);
+        updateBlocks(updatedBlocks);
+    };
+
+    const handleDoubleClick = () => {
         const clickedOverlayStyle = {
             backgroundColor: 'transparent',
             zIndex: 0,

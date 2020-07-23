@@ -7,7 +7,6 @@ function EditorTest({id, content, updateContent}) {
     const [state, setState] = useState({
         editorState: content ? EditorState.createWithContent(convertFromRaw(JSON.parse(content))) : EditorState.createEmpty()
     });
-
     const handleEditorStateChange = (editorState) => {
         const contentState = editorState.getCurrentContent();
         updateContent(id, JSON.stringify(convertToRaw(contentState)))
